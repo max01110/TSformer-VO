@@ -126,17 +126,17 @@ def recover_trajectory_and_poses(poses):
 
 if __name__ == "__main__":
   
-    ckpt_path = "checkpoints/Exp1/"
-    ckpt_name = "checkpoint_e80"
-    sequences = ["01", "03", "04", "05", "06", "07", "10"]
+  
+    checkpoint_path = "checkpoints/Exp4"
+    checkpoint_name = "checkpoint_best"
+    sequences = ["01"]
 
     # read hyperparameters and configuration
-    with open(os.path.join(ckpt_path, "args.pkl"), 'rb') as f:
+    with open(os.path.join(checkpoint_path, "args.pkl"), 'rb') as f:
         args = pickle.load(f)
     f.close()
-
-    ckpt_path = os.path.join(ckpt_path, ckpt_name)
-    args["checkpoint_path"] = ckpt_path
+    model_params = args["model_params"]
+    args["checkpoint_path"] = checkpoint_path
 
     # plot trajectory and ground truth
     for sequence in sequences:

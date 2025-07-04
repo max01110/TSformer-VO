@@ -22,7 +22,7 @@ class KITTI(torch.utils.data.Dataset):
     def __init__(self,
                  data_path=r"data/sequences_jpg",
                  gt_path=r"data/poses",
-                 camera_id="2",
+                 camera_id="0",
                  sequences=["00", "02", "08", "09"],
                  window_size=3,
                  overlap=1,
@@ -56,6 +56,10 @@ class KITTI(torch.utils.data.Dataset):
         # create dataframe with frames and ground truths
         data = pd.DataFrame({"gt": gt})
         data = data["gt"].apply(pd.Series)
+
+        print("len frames:", len(frames))
+        print("len seqs:", len(seqs))
+        
         data["frames"] = frames
         data["sequence"] = seqs
         self.data = data
@@ -145,6 +149,7 @@ class KITTI(torch.utils.data.Dataset):
         seqs = []
         for sequence in self.sequences:
             frames_dir = os.path.join(self.data_path, sequence, "image_{}".format(self.camera_id), "*.jpg")
+            print("test: ", frames_dir)
             frames_seq = sorted(glob.glob(frames_dir))
             frames = frames + frames_seq
             seqs = seqs + [sequence] * len(frames_seq)

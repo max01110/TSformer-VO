@@ -10,9 +10,9 @@ import numpy as np
 from tqdm import tqdm
 
 
-checkpoint_path = "checkpoints/Exp3"
-checkpoint_name = "checkpoint_e90"
-sequences = ["01", "03", "04", "05", "06", "07", "10"]
+checkpoint_path = "checkpoints/Exp4"
+checkpoint_name = "checkpoint_best"
+sequences = ["01"]
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
